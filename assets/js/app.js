@@ -4,7 +4,8 @@ var quality = "";
 var text = "";
 
 getTotals = (event) =>{
-  const selected = document.getElementById('placeType')
+  event.preventDefault();
+  let selected = document.getElementById('placeType');
   text = selected.options[selected.selectedIndex].text;
 
   var radios = document.getElementsByName('serviceQuality')
@@ -58,11 +59,11 @@ getTotals = (event) =>{
     default:
       four(bill, quality);
   }
-}
+};
 
 bar=(amount, qLevel)=>{
   console.log("this is the bar function");
-  const total = parseFloat(amount);
+  let total = parseFloat(amount);
   if (qLevel !== "great") {
     total += 1
   }else {
@@ -73,10 +74,10 @@ bar=(amount, qLevel)=>{
 
 movers=(amount, qLevel)=>{
   console.log("this is the movers function");
-    const total = parseFloat(amount);
+    let total = parseFloat(amount);
   if (qLevel == "poor") {
     total += 0
-  }else if(qLevel =="good"){
+  }else if(qLevel == "good"){
     total += 5
   } else {
     total += 7
@@ -85,7 +86,7 @@ movers=(amount, qLevel)=>{
 }
 
 concierge=(amount, qLevel)=>{
-  const total = parseFloat(amount);
+  let total = parseFloat(amount);
   if (qLevel == "great") {
     total += 15
   }
@@ -93,7 +94,7 @@ concierge=(amount, qLevel)=>{
 }
 
 pizza=(amount, qLevel)=>{
-  const total = parseFloat(amount);
+  let total = parseFloat(amount);
   if (qLevel == "great") {
     if ((amount*.2) > 4) {
       total+= (amount*.2)
@@ -117,12 +118,12 @@ pizza=(amount, qLevel)=>{
 }
 
 no=(amount, qLevel)=>{
-  const total = parseFloat(amount);
+  let total = parseFloat(amount);
   setTipAmount(amount, total)
 }
 
 officiant=(amount, qLevel)=>{
-  const total = parseFloat(amount);
+ let total = parseFloat(amount);
   if (qLevel == "great") {
     total += 100
   } else if(qLevel == "good") {
@@ -134,7 +135,7 @@ officiant=(amount, qLevel)=>{
 }
 
 cabs=(amount, qLevel)=>{
-  const total = parseFloat(amount);
+  let total = parseFloat(amount);
   if (qLevel == "great") {
     total += (amount*.15)
   } else if(qLevel == "good") {
@@ -147,7 +148,7 @@ cabs=(amount, qLevel)=>{
 
 coffee=(amount, qLevel)=>{
   console.log("this is the coffee function");
-  const total = parseFloat(amount);
+  let total = parseFloat(amount);
   if (qLevel == "great") {
     total += (amount*.15)
   } else if(qLevel == "good") {
@@ -160,7 +161,7 @@ coffee=(amount, qLevel)=>{
 
 one=(amount, qLevel)=>{
   console.log("this is the one function");
-  const total = parseFloat(amount);
+  let total = parseFloat(amount);
   if (qLevel == "great") {
     total += 10
   } else if(qLevel == "good") {
@@ -173,7 +174,7 @@ one=(amount, qLevel)=>{
 
 two=(amount, qLevel)=>{
   console.log("this is the two function");
-  const total = parseFloat(amount);
+ let total = parseFloat(amount);
   if (qLevel == "great") {
     total += (amount*.1)
   } else if(qLevel == "good") {
@@ -186,7 +187,7 @@ two=(amount, qLevel)=>{
 
 three=(amount, qLevel)=>{
   console.log("this is the three function");
-  const total = parseFloat(amount);
+  let total = parseFloat(amount);
   if (qLevel == "great") {
     total += (amount*.15)
   } else if(qLevel == "good") {
@@ -199,7 +200,7 @@ three=(amount, qLevel)=>{
 
 four=(amount, qLevel)=>{
   console.log("this is the four function");
-  const total = parseFloat(amount);
+  let total = parseFloat(amount);
   if (qLevel == "great") {
     total += (amount*.25)
   } else if(qLevel == "good") {
@@ -211,18 +212,18 @@ four=(amount, qLevel)=>{
 }
 
 setTipAmount = (amount, total) =>{
-  document.getElementById(tipAmounts).style.display = 'block';
-  document.getElementById('messageText').innerText = `For your bill of $${amount} you should tip $${(total - amount).parseInt(2)} for a total of $${total.parseInt(2)}`
+  document.getElementById("tipAmounts").style.display = 'block';
+  document.getElementById('messageText').innerText = `For your bill of $${amount} you should tip $${(total - amount).toFixed(2)} for a total of $${total.toFixed(2)}`
 }
 
 setTipAmountIndividual = (amount, total) =>{
-  document.getElementById(tipAmounts).style.display = 'block';
+  document.getElementById("tipAmounts").style.display = 'block';
   {service=='bar' ? document.getElementById('messageText').innerText = `For your bill of $${amount} you should tip $${(total - amount)} per drink` : document.getElementById('messageText').innerText = `For your bill of $${amount} you should tip $${(total - amount)} per mover`};
 }
 
 reset = (event) =>{
  event.preventDefault();
- document.getElementById(tipAmounts).style.display = 'none';
+ document.getElementById("tipAmounts").style.display = 'none';
  document.getElementById("form").style.display = 'block';
   bill = 0;
   service = "";
